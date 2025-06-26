@@ -1,0 +1,139 @@
+<!--BEGIN LICENSE BLOCK--> 
+<!--Interneuron Terminus
+
+Copyright(C) 2025  Interneuron Limited
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.If not, see<http://www.gnu.org/licenses/>. -->
+<!--END LICENSE BLOCK--> 
+<div class="container">
+  <div class="row mt-3 mb-3">
+      <div class="col-auto">
+          <h3>Assessor Management</h3>            
+      </div>
+  </div>
+  <div class="row mt-3 mb-3">
+    <div class="col-6">
+        <form autocomplete="off">
+            <input type="text" name="search" class="search__input form-control no-print" placeholder="Search for Surname, First name, Assessor ID" [(ngModel)]="filter"/>
+        </form>
+    </div>
+    <div class="col-2">
+      <!-- <button class="btn btn-info" placeholder="search">Search</button> -->
+    </div>
+    <div class="col-2">
+        
+    </div>
+    <div class="col-1 d-flex flex-row-reverse">
+        <img src="../assets/images/Refresh.svg" title="Refresh Assessor" class="pointer" height="32px" width="32px" (click)="listAssessor()"/>
+    </div>
+    <div class="col-1 d-flex flex-row-reverse">
+        <button class="form-control" title="Create Assessor" style="background-color: #1F4DCC; color: white;" placeholder="search" (click)="addAssessor()" *ngIf="appService.AuthoriseAction('manageassessors_add_assessor_record')"> + </button>
+        <!-- <img src="../assets/images/addicon.svg" height="32px" width="32px" class="pointer" /> -->
+    </div>
+</div>
+  <div class="row">
+      <div class="col">
+          <table class="table table-sm table-bordered">
+              <thead>
+                  <tr>
+                      <th>Full Name</th>
+                      <th>Role</th>
+                      <th>Telephone Number</th>
+                      <th>Assessor ID</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <ng-container *ngIf="( assessorList | stringFilter : filter) as result">
+                <tbody>
+                    <tr *ngFor="let assessor of result">
+                        <td>{{assessor.surname}} {{assessor.middlename}} {{assessor.firstname}} </td>
+                        <td>{{assessor.role}}</td>
+                        <td>{{assessor.phoneno}}</td>
+                        <td>{{assessor.assessorid}}</td>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                              <i class="fa fa-edit pointer" title="Edit Assessor" style="color:#1F4DCC" (click)="editAssessor(assessor)" *ngIf="appService.AuthoriseAction('manageassessors_edit_assessor_record')"></i>&nbsp;&nbsp;&nbsp;
+                              <i class="fa fa-trash-o pointer" title="Delete Assessor"style="color:#1F4DCC" (click)="confirmDeleteAssessor(assessor)" *ngIf="appService.AuthoriseAction('manageassessors_delete_assessor_record')"></i>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>                
+                <tbody *ngIf="result.length == 0 && !isLoading">
+                    <tr>
+                        <td colspan="5">
+                            <div class="d-flex justify-content-center">
+                                No data available.
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="isLoading">
+                  <tr>
+                      <td colspan="5">
+                          <div class="d-flex justify-content-center">
+                              <div class="spinner-grow spinner-grow-sm" role="status">
+                                  <span class="sr-only">Loading...</span>
+                              </div>
+                              <div class="spinner-grow spinner-grow-sm" role="status">
+                                  <span class="sr-only">Loading...</span>
+                              </div>
+                              <div class="spinner-grow spinner-grow-sm" role="status">
+                                  <span class="sr-only">Loading...</span>
+                              </div>
+                          </div>
+                      </td>
+                  </tr>
+                </tbody>
+              </ng-container>
+              
+          </table>
+      </div>
+  </div>
+</div>
+
+<!-- Modal Delete Assessor -->
+<ng-template #deleteAssessorModal let-modal>
+    <div class="modal-body">
+        <div class="row">
+          <div class=""  style="font-size:0.8em; margin-top:5px; margin-left: 50px;">
+            <strong>This will delete the assessor record. Do you wish to proceed?</strong>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <button type="button" class="form-control" style="float: right; background-color: #1F4DCC; color: white;" (click)="deleteAssessor(true)">Yes</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <button type="button" class="form-control" style="float: right;" (click)="deleteAssessor(false)">No</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+    </div>
+  </ng-template>
+
+  <!-- <div *ngIf="isLoading" id="pause" class="d-flex align-items-center justify-content-center">
+    <div id="spinner"></div>
+  </div> -->

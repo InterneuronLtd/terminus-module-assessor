@@ -1,0 +1,10 @@
+{
+    "uris": {
+      "baseuri": "SYNAPSE_DYNAMIC_URI"
+    },
+    "enablelogging": true,
+    "appsettings": {
+      "enableRBAC": true
+    },
+    "prodbuild": false
+  }

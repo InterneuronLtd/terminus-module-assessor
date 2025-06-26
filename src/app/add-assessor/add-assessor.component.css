@@ -1,0 +1,99 @@
+.toast-message-positive {
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 4px 8px;
+    gap: 10px;
+
+    width: 300px;
+    height: 32px;
+
+    background: #D9FFE3;
+    border-radius: 4px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+.toast-message-negative {
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 4px 8px;
+    gap: 10px;
+
+    width: 300px;
+    height: 32px;
+
+    background: #FFCACA;
+    border-radius: 4px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+/* Loader */
+#spinner {
+    -webkit-animation: frames 1s infinite linear;
+    animation: frames 1s infinite linear;
+    background: transparent;
+    border: 0.50vw solid #FFF;
+    border-radius: 100%;
+    border-top-color: black;
+    width: 5vw;
+    height: 5vw;
+    opacity: .6;
+    padding: 0;
+    position: absolute;
+    z-index: 999;
+  }
+  @keyframes frames {
+    0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    }
+    100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+    }
+  }
+  
+  #pause {
+    display: block;
+    background:
+      rgba(0, 0, 0, 0.66)
+      no-repeat
+      0 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.custom-ngb-modal-window {
+  z-index: 1 !important;
+}

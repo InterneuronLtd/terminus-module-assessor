@@ -1,0 +1,257 @@
+<!--BEGIN LICENSE BLOCK--> 
+<!--Interneuron Terminus
+
+Copyright(C) 2025  Interneuron Limited
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.If not, see<http://www.gnu.org/licenses/>. -->
+<!--END LICENSE BLOCK--> 
+<div class="modal-header">
+    <h5 class="modal-title">
+     {{title}}
+    </h5>
+  
+    <button class="btn btn-sm btn-default text-white"(click)="dismiss()">
+      <!-- <span aria-hidden="true">&times;</span> -->
+      <img src="assets/images/closeIcon.svg" height="18px">
+    </button>
+  </div>
+  <div class="modal-body">
+    <span class="text-dark">
+      <div>
+        <div class="card">
+          <div class="card-body">
+  
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- Content goes here  -->
+                  <form #addAssessorForm="ngForm" autocomplete="off">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstname">First Name *</label>
+                                <div class="input-group">
+                                  <input class="form-control" type="text" name="firstname" id="firstname" required #firstname="ngModel"
+                                  [(ngModel)]="assessor.firstname" [ngClass]="{ 'is-invalid': firstname.invalid }">
+                                </div>
+                                <!-- <div [hidden]="firstname.valid" class="text-danger">
+                                  <i>First name is required</i>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="middlename">Middle Name</label>
+                                <div class="input-group">
+                                  <input class="form-control" type="text" name="middlename" id="middlename"
+                                  [(ngModel)]="assessor.middlename" #middlename="ngModel">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="surname">Surname *</label>
+                                <div class="input-group">
+                                  <input class="form-control" type="text" name="surname" id="surname" required #surname="ngModel"
+                                  [(ngModel)]="assessor.surname" [ngClass]="{ 'is-invalid': surname.invalid }">
+                                </div>
+                                <!-- <div [hidden]="surname.valid" class="text-danger">
+                                  <i>Sur name is required</i>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="role">Role</label>
+                                <div class="input-group">
+                                  <input class="form-control" type="text" name="role" id="role"
+                                  [(ngModel)]="assessor.role" #role="ngModel">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phoneno">Telephone Number</label>
+                                <div class="input-group">
+                                  <input class="form-control" type="text" name="phoneno" id="phoneno" min="0" maxlength="14" oninput="this.value = this.value.replace(/[^+0-9]/g, '')"
+                                  [(ngModel)]="assessor.phoneno" #phoneno="ngModel">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="assessorid">Assessor ID</label>
+                                <div class="input-group">
+                                  <input disabled class="form-control" type="text" name="assessorid" id="assessorid" #assessorid="ngModel"
+                                  [(ngModel)]="assessor.assessorid">
+                                </div>
+                                <!-- <div>
+                                  <a href="javascript:void(0);" (click)="checkAssessorIdAvailability()">Check Availability</a>
+                                </div>
+                                <div [hidden]="!checkAlphanumeric" class="toast-message-negative">
+                                  <i><i class="fa fa-exclamation-triangle" style="color:red"></i>&nbsp;&nbsp;&nbsp;Assessor ID should be alphanumeric</i>
+                                </div>
+                                <div [hidden]="(!showAssessorErrorMessage || showAssessorAvailableMessage) " class="toast-message-positive">
+                                  <i><i class="fa fa-check-circle" style="color:green"></i>&nbsp;&nbsp;&nbsp;Assessor ID is available</i>
+                                </div>
+                                <div [hidden]="(!showAssessorErrorMessage || showAssessorNotAvailableMessage) " class="toast-message-negative">
+                                  <i><i class="fa fa-exclamation-triangle" style="color:red"></i>&nbsp;&nbsp;&nbsp;Assessor ID is not available</i>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <!-- <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="provider">Provider</label>
+                                <div class="input-group">
+                                  <input class="form-control" type="text" name="provider" id="provider"
+                                  [(ngModel)]="assessor.provider" #provider="ngModel">
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="commissioner">Commissioner</label>
+                              <div class="input-group">
+                                <!-- <input class="form-control" type="text" name="commissioner" id="commissioner"
+                                [(ngModel)]="assessor.commissioner" #commissioner="ngModel"> -->
+                                <select name="commissioner_id" id="commissioner_id" class="form-control"
+                                [(ngModel)]="assessor.commissionerid" required #commissionerid="ngModel">
+                                  <option value="">Please Select</option>
+                                  <option *ngFor="let commissioner of commissionerList" value="{{ commissioner.commissioner_id }}">{{commissioner.name}}</option>
+                                </select>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="assessorlocation">Postcode of Assessor</label>
+                              <div class="input-group">
+                                <input class="form-control" type="text" name="assessorlocation" id="assessorlocation" min="0" maxlength="14"
+                                [(ngModel)]="assessor.assessorlocation" #assessorlocation="ngModel">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="whatthreewords">What three words</label>
+                              <div class="input-group">
+                                <input class="form-control" type="text" name="whatthreewords" id="whatthreewords" min="0"
+                                [(ngModel)]="assessor.whatthreewords" #whatthreewords="ngModel">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <!-- <label for="location">Location of assessor</label>
+                            <div class="input-group">
+                              <input class="form-control" type="text" name="location" id="location" min="0" maxlength="14"
+                              [(ngModel)]="assessor.location" #location="ngModel">
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                              <button class="btn btn-light text-dark" (click)="OpenWhatThreeWords()">
+                                Search
+                              </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <hr />
+      
+                    <div class="row">
+                        <div class="col-md-6">
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            <button class="btn btn-light text-dark btn-block" 
+                                (click)="dismiss()">
+                                Cancel
+                            </button>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                              <button *ngIf="isLoading" style="float:right; background-color: #1F4DCC; color: white;" class="form-control" type="button" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Saving...
+                              </button>
+                              <button *ngIf="!isLoading" style="float:right; background-color: #1F4DCC; color: white;" class="form-control" (click)="saveAssessor()">
+                                  Save 
+                              </button>
+                            </div>
+                        </div>
+                    </div>
+      
+                  </form>
+                  <!-- Content ends here -->
+                </div>
+              </div> 
+          </div>  
+        </div>
+  
+      </div>
+  
+    </span>
+  </div>
+
+  <!-- Modal Validation Assessor -->
+<ng-template #validationAssessorModal let-modal>
+  <div class="modal-body">
+      <div class="row">
+        <div class=""  style="font-size:0.8em; margin-top:5px; margin-left: 120px;">
+          <strong>Please complete all mandatory fields.</strong>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+          <div class="col-md-4">
+
+          </div>
+          <div class="col-md-4">
+              <div class="form-group">
+                  <button type="button" class="form-control" style="float: right; background-color: #1F4DCC; color: white;" (click)="closeValidationModal()">Ok</button>
+              </div>
+          </div>
+          <div class="col-md-4">
+
+          </div>
+      </div>
+  </div>
+</ng-template>
+
+<!-- <div *ngIf="isLoading" id="pause" class="d-flex align-items-center justify-content-center">
+  <div id="spinner"></div>
+</div> -->

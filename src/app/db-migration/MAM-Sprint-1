@@ -1,0 +1,16 @@
+Entity
+-------------------------
+commissioner
+assessor
+
+action
+---------------------------------
+manageassessors_add_assessor_record
+manageassessors_delete_assessor_record
+manageassessors_edit_assessor_record
+
+Role
+----------------------------------
+Social Care Administrator
+Social Care Assessor
+Social Care Super User
